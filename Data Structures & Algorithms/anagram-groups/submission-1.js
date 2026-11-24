@@ -4,20 +4,22 @@ class Solution {
      * @return {string[][]}
      */
     groupAnagrams(strs) {
-        if (strs.length < 1) return;
-        if (strs.length === 1 && strs[0] === "") return [""];
-
-        let trackStrs = {};
+        let anagrams = {};
+        let results = [];
 
         for (let i = 0; i < strs.length; i++) {
-            let sortedStr = strs[i].split("").sort().join("");
-
-            if (trackStrs[sortedStr]) {
-                trackStrs[sortedStr].push(strs[i]);
+            let key = strs[i].split("").sort().join('');
+            if (anagrams[key]) {
+                anagrams[key].push(strs[i])
             } else {
-                trackStrs[sortedStr] = [strs[i]]; 
+                anagrams[key] = [strs[i]];
             }
         }
-     return Object.values(trackStrs)
+
+        for (let arr in anagrams) {
+            results.push(anagrams[arr]);
+        }
+
+        return results;
     }
 }

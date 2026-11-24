@@ -4,12 +4,18 @@ class Solution {
      * @return {boolean}
      */
     hasDuplicate(nums) {
-        let setOfNums = new Set(nums)
-
-        if(setOfNums.size !== nums.length){
-            return true; 
+        let freq = {}; 
+        for (let i = 0; i < nums.length; i++) {
+            if (freq[nums[i]]) {
+                freq[nums[i]] = freq[nums[i]] + 1;
+            } else {
+                freq[nums[i]] = 1;
+            }
         }
 
-        return false; 
-    }
+        for (let num in freq) {
+            if (freq[num] > 1) return true;
+        }
+        return false;
+    };
 }

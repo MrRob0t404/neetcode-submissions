@@ -5,27 +5,25 @@ class Solution {
      * @return {boolean}
      */
     isAnagram(s, t) {
-        if(s.length !== t.length){ 
-            return false; 
-        }
+        if (s.length !== t.length) return false;
 
-        let trackChars = {}; 
-
-        for(let i = 0; i < s.length; i++){ 
-            if(trackChars[s[i]]){ 
-                trackChars[s[i]] = trackChars[s[i]] + 1;
-            }else{ 
-                trackChars[s[i]] = 1; 
+        let freq = {};
+        for (let i = 0; i < s.length; i++) {
+            if (freq[s[i]]) {
+                freq[s[i]] = freq[s[i]] + 1;
+            } else {
+                freq[s[i]] = 1;
             }
         }
 
-        for(let i = 0; i < s.length; i++){ 
-            if(trackChars[t[i]] < 1 || !trackChars[t[i]]){ 
-               return false; 
-            }else{ 
-                trackChars[t[i]] = trackChars[t[i]] - 1; 
+        for (let i = 0; i < t.length; i++) {
+            if (!freq[t[i]]) return false;
+            if (freq[t[i]] && freq[t[i]] > 0) {
+                freq[t[i]] = freq[t[i]] - 1;
+            } else {
+                return false
             }
         }
-        return true; 
+        return true;
     }
 }
